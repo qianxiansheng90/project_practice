@@ -205,8 +205,8 @@ import(
 	"github.com/gin-gonic/gin"
 	"github.com/pkg/errors"
 
-	"gitlab.corp.qunar.com/fangyuan.qian/dubai_common/daemon/server"
-	"gitlab.corp.qunar.com/fangyuan.qian/dubai_common/daemon/server"
+	"xxxx/daemon/server"
+	"xxxx/daemon/version"
 
 )
 ```
