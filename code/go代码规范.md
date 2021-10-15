@@ -1,3 +1,10 @@
+---
+tags: [开发, go]
+title: 代码规范
+created: '2021-10-13T09:28:14.934Z'
+modified: '2021-10-15T02:01:27.092Z'
+---
+
 # 代码规范
 
 # 说明
@@ -123,7 +130,7 @@ import (
 	"github.com/pkg/errors"
 
 	"gitlab.corp.qunar.com/fangyuan.qian/dubai_common/daemon/server"
-	"gitlab.corp.qunar.com/fangyuan.qian/dubai_common/daemon/server"
+	"gitlab.corp.qunar.com/fangyuan.qian/dubai_common/daemon/version"
 )
 
 const(
@@ -139,7 +146,7 @@ var (
 )
 
 func test() {
-  ...
+	...
 }
 
 ```
@@ -204,7 +211,7 @@ import(
 	"github.com/pkg/errors"
 
 	"gitlab.corp.qunar.com/fangyuan.qian/dubai_common/daemon/server"
-	"gitlab.corp.qunar.com/fangyuan.qian/dubai_common/daemon/server"
+	"gitlab.corp.qunar.com/fangyuan.qian/dubai_common/daemon/version"
 
 )
 ```
@@ -287,7 +294,7 @@ type HelloWorld struct{
 缩进采用四个空格，使用gofmt格式化。
 
 <font color='blue'>[Advise]</font>
-单行最长不超过120字符，除了长文本语句(```)。
+单行最长不超过120字符，除了长文本语句(`)。
 
 <font color='green'>[Good]</font>
 go语言不需要结尾冒号，多条语句应该分行（除了错误处理）；
@@ -380,6 +387,7 @@ func (r *Receiver) myFunc(id int64, name string) (info string, err error) {
 ```
 
 #### tag注释
+
 tag有助于表示此处可能需要做一些特殊的处理。
 允许使用的tag:
 + **TODO**：表示此处需要在未来做一些事情。
@@ -426,7 +434,9 @@ func myFunction() (string, string) {
 }
 ```
 
-#### 错误处理
+#### 缩小变量作用范围
+如果有可能，尽量缩小变量作用范围。
+
 <font color='green'>[Good]</font>
 
 ```go
@@ -457,6 +467,7 @@ if exist == true {
 }
 ```
 #### 条件语句中尽量不使用else
+不使用else，可以减少分支逻辑，增加可读性。
 
 <font color='blue'>[Advise]</font>
 ```go
@@ -482,6 +493,41 @@ if exist == true {
 <font color='blue'>[Advise]</font>
 不要使用panic，除非你真的知道这样做会有什么问题。
 
+#### 错误处理
+禁止将字符串格式化完成之后再填充到error中，应当使用error.Errorf格式化错误信息。
+使用```pkg/errors".Wrap```添加更多上下文信息，使用```pkg/errors".Cause```可以用于提取原始错误信息。
+<font color='blue'>[Advise]</font>
+```go
+err = errors.Errorf("xx", "xx")
+
+err = errors.Wrap(err,"xx")
+
+err = errors.Cause(err)
+```
+
+<font color='red'>[Bad]</font>
+```go
+err = errors.New(fmt.Sprintf("xx", "xx"))
+
+err = errors.Errorf("xx %s", err.Error())
+```
+
+#### 使用defer释放资源
+使用defer释放资源，诸如文件、锁等。在循环里面需要显示释放资源，不能使用defer。
+
+<font color='blue'>[Advise]</font>
+```go
+p.Lock()
+defer p.Unlock()
+...
+```
+<font color='red'>[Bad]</font>
+```go
+p.Lock()
+...
+p.Unlock()
+```
+
 
 #### 隐式返回
 如果函数行数比较少，推荐使用这种写法，否则建议显示返回。
@@ -493,7 +539,39 @@ func myFunc() (err error){
 	return
 }
 ```
-
-#### 初始化函数
+#### 结构体初始化
+初始化结构体时，需要指定字段名，可以省略默认值字段。
 <font color='blue'>[Advise]</font>
-初始化函数不要做耗时操作，初始化函数应该作为当前文件第一个函数。
+```go
+var u1 = User{
+	Name:     "test",
+	Sex:      "male",
+	Age:      0,
+	Address:  "",
+	BirthDay: time.Now(),
+}
+
+var u2 = User{
+	Name:     "test",
+	Sex:      "male",
+	Age:      0,
+	Address:  "",
+	BirthDay: time.Now(),
+}
+...
+return
+```
+
+<font color='red'>[Bad]</font>
+```go
+var u = User{1024, "a", "male" ,10 ,"" ,time.Now()}
+```
+
+#### init函数
+<font color='blue'>[Advise]</font>
+
+init函数不要做耗时操作。
+init函数应该作为当前文件第一个函数。
+代码运行不能依赖init执行顺序。
+
+
