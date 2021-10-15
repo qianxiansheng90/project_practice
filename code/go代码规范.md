@@ -1,16 +1,11 @@
----
-tags: [开发, go]
-title: 代码规范
-created: '2021-10-13T09:28:14.934Z'
-modified: '2021-10-15T02:01:27.092Z'
----
+[TOC]
 
 # 代码规范
 
 # 说明
 
 代码规范是提供一个良好的编程规范，用于统一代码风格以及约束编程行为。
-代码规范如果存在不合理之处或者有更好的建议，请联系**fangyuan.qian@qunai.com**。
+代码规范如果存在不合理之处或者有更好的建议，请联系**邮件**。
 
 ### 约束说明
 <font color='green'>[Good]</font> 表示强制，规范必须遵守。
@@ -29,7 +24,6 @@ modified: '2021-10-15T02:01:27.092Z'
 #### 文件命名
 文件命名只能使用小写字母(a-z)、数字(0-9)、下划线(-)，并且只能以字母开头。
 测试文件文件名需要以 "_test" 结尾。
-
 <font color='green'>[Good]</font>
 ```
 api.go
@@ -46,10 +40,8 @@ HTTP_Handler.go
 500_handler.go
 404-handler.go
 ```
-
 #### package 命名
 package命名只能使用小写字母(a-z)、数字(0-9)、下划线(-)，并且只能以字母开头。
-
 <font color='green'>[Good]</font>
 ```
 package mysql_connect
@@ -59,8 +51,8 @@ package mysql_connect
 package mysqlConnect
 package mysql-Connect
 ```
-
 <font color='blue'>[Advise]</font>
+
 
 每个包需要有一个文件名和包名相同的文件，并在文件的头部注释说明当前包的用途。
 
@@ -69,7 +61,6 @@ package mysql-Connect
 首字母为小写字母则只允许内部包访问，首字母为大写字母则外部包可以访问。
 禁止使用全大写，严格按照驼峰命名。
 测试函数命名需要以Test开头。如果是对某个场景的测试用例分组，则可以使用下划线(_)，例如：TestMyFunction_WhenIDOverflow。
-
 <font color='green'>[Good]</font>
 ```
 const genParallel = 10
@@ -94,7 +85,6 @@ var _MySQL_CONNECT_DSN string
 
 func MYFUNCTION()
 ```
-
 #### json tag
 json tag 推荐使用小写字母(a-z)、数字(0-9)、下划线(_)并且只能以字母开头。
 
@@ -111,10 +101,10 @@ type HelloWorld struct {
 文件格式书写示例
 ``` go
 /*
- * Copyright (c) 2011 Qunar.com. All Rights Reserved.
- * @Author: fangyuan.qian
+ * Copyright (c) 2011 xxxx.com. All Rights Reserved.
+ * @Author: xxxx
  * @Create: 2021-09-28 09:46:15
- * @Modifier: fangyuan.qian
+ * @Modifier: xxxx
  * @Update: 2021-10-14 11:38:03
  * @Description: 这是测试文件
  */
@@ -129,8 +119,13 @@ import (
 	"github.com/gin-gonic/gin"
 	"github.com/pkg/errors"
 
+<<<<<<< HEAD
 	"gitlab.corp.qunar.com/fangyuan.qian/dubai_common/daemon/server"
 	"gitlab.corp.qunar.com/fangyuan.qian/dubai_common/daemon/version"
+=======
+	"gitlab.xxxx/daemon/server"
+	"gitlab.xxxx/daemon/version"
+>>>>>>> 7179321dc3ada3513ed7bc1b305e7900da7c3879
 )
 
 const(
@@ -177,10 +172,10 @@ func
 <font color='green'>[Good]</font>
 ```
 /*
- * Copyright (c) 2011 Qunar.com. All Rights Reserved.
- * @Author: fangyuan.qian
+ * Copyright (c) 2011 xxxx.com. All Rights Reserved.
+ * @Author: xxxx
  * @Create: 2021-09-28 09:46:15
- * @Modifier: fangyuan.qian
+ * @Modifier: xxxx
  * @Update: 2021-10-14 11:38:03
  * @Description: 这是测试文件
  */
@@ -190,8 +185,8 @@ func
 <font color='red'>[Bad]</font>
 ```
 /*
- * Copyright (c) 2011 Qunar.com. All Rights Reserved.
- * @Author: fangyuan.qian
+ * Copyright (c) 2011 xxxx.com. All Rights Reserved.
+ * @Author: xxxxx
  * @Create: 2021-09-28 09:46:15
  */
 ```
@@ -210,8 +205,13 @@ import(
 	"github.com/gin-gonic/gin"
 	"github.com/pkg/errors"
 
+<<<<<<< HEAD
 	"gitlab.corp.qunar.com/fangyuan.qian/dubai_common/daemon/server"
 	"gitlab.corp.qunar.com/fangyuan.qian/dubai_common/daemon/version"
+=======
+	"xxxx/daemon/server"
+	"xxxx/daemon/version"
+>>>>>>> 7179321dc3ada3513ed7bc1b305e7900da7c3879
 
 )
 ```
@@ -561,12 +561,21 @@ var u2 = User{
 ...
 return
 ```
+<<<<<<< HEAD
 
 <font color='red'>[Bad]</font>
 ```go
 var u = User{1024, "a", "male" ,10 ,"" ,time.Now()}
 ```
 
+=======
+
+<font color='red'>[Bad]</font>
+```go
+var u = User{1024, "a", "male" ,10 ,"" ,time.Now()}
+```
+
+>>>>>>> 7179321dc3ada3513ed7bc1b305e7900da7c3879
 #### init函数
 <font color='blue'>[Advise]</font>
 
@@ -574,4 +583,7 @@ init函数不要做耗时操作。
 init函数应该作为当前文件第一个函数。
 代码运行不能依赖init执行顺序。
 
+<<<<<<< HEAD
 
+=======
+>>>>>>> 7179321dc3ada3513ed7bc1b305e7900da7c3879
