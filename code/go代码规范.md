@@ -119,13 +119,8 @@ import (
 	"github.com/gin-gonic/gin"
 	"github.com/pkg/errors"
 
-<<<<<<< HEAD
-	"gitlab.corp.qunar.com/fangyuan.qian/dubai_common/daemon/server"
-	"gitlab.corp.qunar.com/fangyuan.qian/dubai_common/daemon/version"
-=======
 	"gitlab.xxxx/daemon/server"
 	"gitlab.xxxx/daemon/version"
->>>>>>> 7179321dc3ada3513ed7bc1b305e7900da7c3879
 )
 
 const(
@@ -205,13 +200,8 @@ import(
 	"github.com/gin-gonic/gin"
 	"github.com/pkg/errors"
 
-<<<<<<< HEAD
-	"gitlab.corp.qunar.com/fangyuan.qian/dubai_common/daemon/server"
-	"gitlab.corp.qunar.com/fangyuan.qian/dubai_common/daemon/version"
-=======
 	"xxxx/daemon/server"
 	"xxxx/daemon/version"
->>>>>>> 7179321dc3ada3513ed7bc1b305e7900da7c3879
 
 )
 ```
@@ -561,21 +551,12 @@ var u2 = User{
 ...
 return
 ```
-<<<<<<< HEAD
 
 <font color='red'>[Bad]</font>
 ```go
 var u = User{1024, "a", "male" ,10 ,"" ,time.Now()}
 ```
 
-=======
-
-<font color='red'>[Bad]</font>
-```go
-var u = User{1024, "a", "male" ,10 ,"" ,time.Now()}
-```
-
->>>>>>> 7179321dc3ada3513ed7bc1b305e7900da7c3879
 #### init函数
 <font color='blue'>[Advise]</font>
 
@@ -583,7 +564,3 @@ init函数不要做耗时操作。
 init函数应该作为当前文件第一个函数。
 代码运行不能依赖init执行顺序。
 
-<<<<<<< HEAD
-
-=======
->>>>>>> 7179321dc3ada3513ed7bc1b305e7900da7c3879
